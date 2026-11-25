@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angolo reale sonda &#x2013; IIW-1 Block</title>
+<style>
+:root{--bg:#f1f3ef;--panel:#fff;--ink:#16201f;--mute:#5d6b69;--line:#cfd7d4;--acc:#176b82;--ok:#1b7a3d;--okbg:#dff3e5;--ko:#b3261e;--kobg:#fbe3e1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121719;--panel:#1b2225;--ink:#e6eceb;--mute:#93a3a0;--line:#2f3b3e;--acc:#5bb8d1;--ok:#7ddc9c;--okbg:#17321f;--ko:#ff8a80;--kobg:#3a1c1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121719;--panel:#1b2225;--ink:#e6eceb;--mute:#93a3a0;--line:#2f3b3e;--acc:#5bb8d1;--ok:#7ddc9c;--okbg:#17321f;--ko:#ff8a80;--kobg:#3a1c1a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:480px;margin:0 auto;padding:12px}
+h1{font-size:1.15rem;margin:0 0 4px}
+p.sub{margin:0 0 14px;color:var(--mute);font-size:.9rem}
+.credit{text-align:center;color:var(--mute);font-size:.8rem;margin:14px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+label{display:block;font-size:.85rem;color:var(--mute);margin:8px 0 3px}
+label:first-child{margin-top:0}
+select,input{width:100%;font:inherit;font-size:1.2rem;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+select:focus,input:focus{outline:2px solid var(--acc);outline-offset:1px}
+input[readonly]{font-weight:650;font-variant-numeric:tabular-nums}
+.res{margin-top:10px;padding-top:4px;border-top:1px solid var(--line)}
+.badge{margin-top:8px;padding:10px;border-radius:8px;font-size:1.25rem;font-weight:700;text-align:center;background:var(--bg);color:var(--mute)}
+.badge.ok{background:var(--okbg);color:var(--ok)}
+.badge.ko{background:var(--kobg);color:var(--ko)}
+.badge small{display:block;font-size:.85rem;font-weight:400;margin-top:2px}
+.msg{color:var(--ko);font-size:.9rem;min-height:1.2rem;margin-top:8px}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.m2{grid-template-columns:1fr 1fr;margin-bottom:8px}
+.opts.m2 label{font-size:.95rem}
+.xa{display:none;grid-template-columns:1fr 1fr;gap:8px;align-items:end}
+.hint{margin:-2px 0 8px;font-size:.8rem;color:var(--mute)}
+#p,#x,#l{border:2px solid var(--acc);padding:7px 11px}
+#r{border-style:dashed;background:transparent}
+:root{--x:#d9822b}
+#x{border-color:var(--x)}
+.sch{grid-column:1/-1;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.sch svg{display:block;width:100%;height:auto}
+.leg{margin:6px 0 0;font-size:.78rem;color:var(--mute);line-height:1.35}
+.la{color:var(--acc)}
+.lx{color:var(--x)}
+.bk{fill:none;stroke:var(--mute);stroke-width:2}
+.da{fill:none;stroke:var(--acc);stroke-width:2}
+.dx{fill:none;stroke:var(--x);stroke-width:2}
+.dk{fill:none;stroke:var(--ink);stroke-width:1.6}
+.ext{fill:none;stroke:var(--mute);stroke-width:1;stroke-dasharray:2 3}
+.ta{fill:var(--acc);font:700 13px system-ui,sans-serif}
+.tb{fill:var(--x);font:700 12px system-ui,sans-serif}
+.tc{fill:var(--ink);font:600 11px system-ui,sans-serif}
+.tri{fill:var(--x)}
+.opts label{display:flex;align-items:center;justify-content:center;gap:6px;margin:0;padding:8px 0;font-size:1.2rem;color:var(--ink);border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer}
+.opts label:has(input:checked){border-color:var(--acc);outline:1px solid var(--acc);font-weight:650}
+.opts input{width:auto;padding:0;margin:0;accent-color:var(--acc);transform:scale(1.2)}
+.blocks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.blk{display:block;margin:0;padding:8px 8px 4px;border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer;color:var(--ink);font-size:1rem}
+.blk:has(input:checked){border-color:var(--acc);outline:1px solid var(--acc)}
+.bh{display:flex;align-items:center;gap:8px}
+.bh b{font-size:.9rem}
+.bh em{font-style:normal;color:var(--mute);font-size:.8rem;margin-left:auto;text-align:right}
+.blk input{width:auto;padding:0;margin:0;accent-color:var(--acc);transform:scale(1.2)}
+.blk svg{display:block;width:100%;height:auto;margin-top:6px}
+.bd{fill:none;stroke:var(--mute);stroke-width:3}
+.ct{fill:none;stroke:var(--mute);stroke-width:1.4;stroke-dasharray:10 3 2 3}
+.ex{fill:none;stroke:var(--mute);stroke-width:1.4;stroke-dasharray:3 5}
+.dm{fill:none;stroke:var(--ink);stroke-width:2.4}
+.bm{fill:none;stroke:var(--acc);stroke-width:3;stroke-dasharray:9 5}
+.pb{fill:var(--line);stroke:var(--ink);stroke-width:2.2}
+.pl{fill:#2a9fd6}
+.tk{fill:none;stroke:var(--ink);stroke-width:1.4}
+.pd{fill:var(--ink)}
+.tx{fill:var(--ink);font:650 20px system-ui,sans-serif}
+.tx2{fill:var(--mute);font:15px system-ui,sans-serif;paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.sk{fill:none;stroke:var(--ink);stroke-width:1.6}
+.bd2{fill:none;stroke:var(--mute);stroke-width:2}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 6px}
+.top h1{margin:0;font-size:1rem;flex:1;min-width:0}
+.lang{display:flex;gap:4px}
+.lang button{font:inherit;font-size:.8rem;font-weight:650;padding:5px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);cursor:pointer}
+.lang button.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+</style>
+</head>
+<body>
+<pre id="err" style="margin:0;padding:4px 12px;color:#b3261e;font-size:12px;white-space:pre-wrap"></pre>
+<script>window.onerror=function(m,u,l){var e=document.getElementById("err");if(e)e.textContent+=m+" (riga "+l+")\n"};</script>
+<main>
+<div class="top">
+  <h1 data-i="title"></h1>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-l="it">IT</button><button type="button" data-l="en">EN</button><button type="button" data-l="fr">FR</button>
+  </div>
+</div>
+<div class="card">
+  <div class="opts m2" id="mg" role="radiogroup">
+    <label><input type="radio" name="m" value="p" checked><span data-i="mp"></span></label>
+    <label><input type="radio" name="m" value="a">UNI EN ISO 22232-3</label>
+  </div>
+  <p class="hint" id="hint"></p>
+  <div class="blocks" id="blocks" role="radiogroup"></div>
+
+  <label for="p" id="pl" data-i="pl"></label>
+  <input id="p" inputmode="decimal" autocomplete="off" data-p="ph_p">
+  <div class="xa" id="xa">
+    <div><label for="x" data-i="lx"></label><input id="x" inputmode="decimal" autocomplete="off" placeholder="X (mm)"></div>
+    <div><label for="l" data-i="ll"></label><input id="l" inputmode="decimal" autocomplete="off" placeholder="L (mm)"></div>
+  </div>
+
+  <label id="tl" data-i="tl"></label>
+  <div class="opts" id="angs" role="radiogroup" aria-labelledby="tl"></div>
+
+  <div class="res">
+    <label for="r" id="rl"></label>
+    <input id="r" readonly placeholder="&#x2014;">
+    <div class="msg" id="msg"></div>
+    <div class="badge" id="badge"></div>
+  </div>
+</div>
+<p class="credit" data-i="credit"></p>
+</main>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var TOL=2,RAGGIO=25,lang='it';
+var T={
+it:{title:'Angolo reale sonda \u2013 IIW-1 Block',mp:'Percorso',pl:'Percorso ultrasonoro (mm)',ph_p:'Percorso ultrasonoro (mm)',lx:'X \u2013 punto di emissione (mm)',ll:'L \u2013 fronte sonda \u2192 fine pezzo (mm)',tl:'Angolo teorico (\u00B0)',rl:'Angolo reale (\u00B0)',credit:'Creato da Francesco Daidone',
+hp:'\u03B1 = arccos( D / (percorso + 25) ). Compila il campo con il bordo colorato.',ha:'\u03B1 = arctan( (A \u2212 35) / D ), con A = X + L. Compila i campi con il bordo colorato.',
+wp:'Inserisci il percorso',wa:'Inserisci X ed L',np:'Inserisci un numero positivo.',nn:'Inserisci numeri positivi.',nc:'Non calcolabile',a35:'A (X + L) deve essere maggiore di 35 mm.',q1:'D / (percorso + 25) supera 1: controlla i valori.',ok:'CONFORME',ko:'NON CONFORME',dev:'scostamento',tol:'tolleranza',
+leg:'<b class="la">L</b>: distanza tra il fronte sonda e l\u2019estremit\u00E0 (fine pezzo) del blocco. <b class="lx">X</b>: distanza tra il fronte sonda e il punto di emissione del fascio (index).',
+ablk:'foro a {D} mm dalla faccia della sonda',asch:'Come ricavare X ed L',am:'Metodo di calcolo',ab:'Posizione del foro'},
+en:{title:'Actual probe angle \u2013 IIW-1 Block',mp:'Sound path',pl:'Sound path (mm)',ph_p:'Sound path (mm)',lx:'X \u2013 index point (mm)',ll:'L \u2013 probe front \u2192 end of block (mm)',tl:'Nominal angle (\u00B0)',rl:'Actual angle (\u00B0)',credit:'Created by Francesco Daidone',
+hp:'\u03B1 = arccos( D / (path + 25) ). Fill in the outlined field.',ha:'\u03B1 = arctan( (A \u2212 35) / D ), with A = X + L. Fill in the outlined fields.',
+wp:'Enter the sound path',wa:'Enter X and L',np:'Enter a positive number.',nn:'Enter positive numbers.',nc:'Cannot calculate',a35:'A (X + L) must be greater than 35 mm.',q1:'D / (path + 25) exceeds 1: check the values.',ok:'COMPLIANT',ko:'NON-COMPLIANT',dev:'deviation',tol:'tolerance',
+leg:'<b class="la">L</b>: distance between the probe front and the end of the block. <b class="lx">X</b>: distance between the probe front and the beam index point.',
+ablk:'hole at {D} mm from the probe face',asch:'How to obtain X and L',am:'Calculation method',ab:'Hole position'},
+fr:{title:'Angle r\u00E9el sonde \u2013 IIW-1 Block',mp:'Parcours',pl:'Parcours ultrasonore (mm)',ph_p:'Parcours ultrasonore (mm)',lx:'X \u2013 point d\u2019\u00E9mergence (mm)',ll:'L \u2013 avant sonde \u2192 extr\u00E9mit\u00E9 du bloc (mm)',tl:'Angle nominal (\u00B0)',rl:'Angle r\u00E9el (\u00B0)',credit:'Cr\u00E9\u00E9 par Francesco Daidone',
+hp:'\u03B1 = arccos( D / (parcours + 25) ). Remplissez le champ \u00E0 bordure color\u00E9e.',ha:'\u03B1 = arctan( (A \u2212 35) / D ), avec A = X + L. Remplissez les champs \u00E0 bordure color\u00E9e.',
+wp:'Saisissez le parcours',wa:'Saisissez X et L',np:'Saisissez un nombre positif.',nn:'Saisissez des nombres positifs.',nc:'Calcul impossible',a35:'A (X + L) doit \u00EAtre sup\u00E9rieur \u00E0 35 mm.',q1:'D / (parcours + 25) d\u00E9passe 1 : v\u00E9rifiez les valeurs.',ok:'CONFORME',ko:'NON CONFORME',dev:'\u00E9cart',tol:'tol\u00E9rance',
+leg:'<b class="la">L</b> : distance entre l\u2019avant de la sonde et l\u2019extr\u00E9mit\u00E9 du bloc. <b class="lx">X</b> : distance entre l\u2019avant de la sonde et le point d\u2019\u00E9mergence du faisceau (index).',
+ablk:'trou \u00E0 {D} mm de la face de la sonde',asch:'Comment obtenir X et L',am:'M\u00E9thode de calcul',ab:'Position du trou'}};
+function t(k){return T[lang][k]}
+function fmt(v,n){var s=v.toFixed(n);return lang==='en'?s:s.replace('.',',')}
+function tr(){
+  document.documentElement.lang=lang;document.title=t('title');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-i]'),function(e){e.textContent=t(e.getAttribute('data-i'))});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-p]'),function(e){e.placeholder=t(e.getAttribute('data-p'))});
+  $('mg').setAttribute('aria-label',t('am'));$('blocks').setAttribute('aria-label',t('ab'));
+  Array.prototype.forEach.call(document.querySelectorAll('.lang button'),function(b){b.classList.toggle('on',b.getAttribute('data-l')===lang)});
+}
+function calc(){
+  var s=$('p').value.trim().replace(',','.'),m=$('msg'),b=$('badge'),r=$('r');
+  m.textContent='';b.className='badge';
+  var M=document.querySelector('input[name=m]:checked').value,isA=M==='a';
+  $('xa').style.display=isA?'grid':'none';$('pl').style.display=$('p').style.display=isA?'none':'';
+  $('rl').textContent=t('rl');
+  var D=Number(document.querySelector('input[name=d]:checked').value),tt=Number(document.querySelector('input[name=t]:checked').value),a,p,wait=isA?t('wa'):t('wp');
+  if(isA){
+    var sx=$('x').value.trim().replace(',','.'),sl=$('l').value.trim().replace(',','.');
+    if(sx===''||sl===''){r.value='';b.innerHTML=wait;return}
+    var X=Number(sx),L=Number(sl);
+    if(!isFinite(X)||!isFinite(L)||X<0||L<=0){r.value='';b.innerHTML=wait;m.textContent=t('nn');return}
+    p=X+L;$('rl').textContent=t('rl')+' \u2013 A = '+fmt(p,1);
+    if(p<=35){r.value='';b.innerHTML=t('nc');m.textContent=t('a35');return}
+    a=Math.atan((p-35)/D)*180/Math.PI;
+  }else{
+    if(s===''){r.value='';b.innerHTML=wait;return}
+    p=Number(s);
+    if(!isFinite(p)||p<=0){r.value='';b.innerHTML=wait;m.textContent=t('np');return}
+    var q=D/(p+RAGGIO);
+    if(q>1){r.value='';b.innerHTML=t('nc');m.textContent=t('q1');return}
+    a=Math.acos(q)*180/Math.PI;
+  }
+  var dev=a-tt,ok=Math.abs(dev)<=TOL+1e-9;
+  r.value=fmt(a,2);
+  b.className='badge '+(ok?'ok':'ko');
+  b.innerHTML=(ok?t('ok'):t('ko'))+'<small>'+t('dev')+' '+(dev>=0?'+':'\u2212')+fmt(Math.abs(dev),2)+'\u00B0 ('+t('tol')+' \u00B1'+TOL+'\u00B0)</small>';
+}
+function angs(){
+  var M=document.querySelector('input[name=m]:checked').value,D=Number(document.querySelector('input[name=d]:checked').value);
+  var list=M==='a'?(D===30?[60,70]:[30,45,60]):[45,60,70,80];
+  var cur=document.querySelector('input[name=t]:checked'),c=cur?Number(cur.value):0;
+  var sel=list.indexOf(c)>=0?c:(list.indexOf(70)>=0?70:45),h='';
+  list.forEach(function(v){h+='<label><input type="radio" name="t" value="'+v+'"'+(v===sel?' checked':'')+'>'+v+'</label>'});
+  var g=$('angs');g.innerHTML=h;g.style.gridTemplateColumns='repeat('+list.length+',1fr)';
+  $('hint').textContent=M==='a'?t('ha'):t('hp');
+}
+function blk(D,chk){
+var A=D===30,idx=A?70:50,list=A?[60,70,76]:[40,50,60,66],lo=list[0],hi=list[list.length-1],T=Math.PI/180;
+var xs=function(a){return 35+D*Math.tan(a*T)},r=function(n){return Math.round(n*10)/10},ix=r(xs(idx));
+var out=A?'M0,0 H300 A100,100 0 0 1 234.1,94 H200 V100 H0 Z':'M0,0 H200 V6 H234.1 A100,100 0 0 1 300,100 H0 Z';
+var s='<path class="bd" d="'+out+'"/><circle class="bd" cx="35" cy="'+D+'" r="25"/>';
+s+='<path class="ct" d="M5,'+D+' H65 M35,'+(D-28)+' V'+(D+28)+'"/>';
+if(!A)s+='<circle class="bd2" cx="35" cy="20" r="7.5"/><path class="ct" d="M24,20 H46 M35,9 V31"/>';
+var k='',a,x;
+for(a=lo;a<=hi;a+=2){k+='M'+r(xs(a))+',0 V'+(list.indexOf(a)>=0?9:5)}
+if(A){k+='M0,85 H200';for(x=0;x<=200;x+=10){k+='M'+x+',85 V'+(x%50?90:94)}}
+s+='<path class="sk" d="'+k+'"/>';
+s+='<path class="bm" d="M'+ix+',0 L35,'+D+'"/>';
+for(a=0;a<list.length;a++){s+='<text class="tx2" x="'+r(xs(list[a]))+'" y="22" text-anchor="middle">'+list[a]+'\u00B0</text>'}
+s+='<path class="dm" d="M-14,0 V'+D+' M-18,6 L-14,0 L-10,6 M-18,'+(D-6)+' L-14,'+D+' L-10,'+(D-6)+'"/>';
+s+='<path class="ex" d="M-22,0 H0 M-22,'+D+' H35"/>';
+s+='<text class="tx" x="-19" y="'+(D/2+8)+'" text-anchor="end">'+D+'</text>';
+var tq='';for(x=ix-10;x<=ix+18;x+=4){tq+='M'+x+',0 V'+(x%8?-3:-5)}
+s+='<path class="pb" d="M'+(ix-10)+',0 L'+(ix-17)+',-7 V-19 Q'+(ix-17)+',-25 '+(ix-11)+',-25 H'+(ix+15)+' Q'+(ix+21)+',-25 '+(ix+21)+',-19 V0 Z"/>';
+s+='<rect class="pl" x="'+(ix-11)+'" y="-25" width="26" height="4"/><rect class="pb" x="'+(ix+21)+'" y="-19" width="6" height="10" rx="1"/>';
+s+='<path class="tk" d="'+tq+'"/><circle class="pd" cx="'+ix+'" cy="-9" r="3.2"/>';
+return '<label class="blk"><span class="bh"><input type="radio" name="d" value="'+D+'"'+(chk?' checked':'')+'><b>Side '+(D===30?'A':'B')+' \u00B7 D = '+D+' mm</b></span><svg viewBox="0 0 356 140" role="img" aria-label="IIW-1 Block, '+t('ablk').replace('{D}',D)+'"><g transform="translate(48,32)">'+s+'</g></svg></label>';}
+function sch(){return '<div class="sch"><svg viewBox="0 0 360 90" role="img" aria-label="'+t('asch')+'">'+
+'<path class="bk" d="M10,90 V40 H350"/>'+
+'<path class="pb" d="M158,40 L150,32 V16 Q150,10 156,10 H200 Q206,10 206,16 V40 Z"/>'+
+'<rect class="pl" x="156" y="10" width="44" height="4"/><rect class="pb" x="206" y="18" width="6" height="10" rx="1"/>'+
+'<circle class="pd" cx="170" cy="29" r="3"/><path class="tri" d="M170,41 L166,47 L174,47 Z"/>'+
+'<path class="ext" d="M150,40 V64 M170,47 V86"/>'+
+'<path class="da" d="M10,60 H150 M14,57 L10,60 L14,63 M146,57 L150,60 L146,63"/>'+
+'<path class="dx" d="M150,60 H170 M154,57 L150,60 L154,63 M166,57 L170,60 L166,63"/>'+
+'<path class="dk" d="M10,82 H170 M14,79 L10,82 L14,85 M166,79 L170,82 L166,85"/>'+
+'<text class="ta" x="80" y="54" text-anchor="middle">L</text>'+
+'<text class="tb" x="160" y="54" text-anchor="middle">X</text>'+
+'<text class="tc" x="90" y="77" text-anchor="middle">A = X + L</text>'+
+'</svg><p class="leg">'+t('leg')+'</p></div>';}
+function side(){
+  var M=document.querySelector('input[name=m]:checked').value,cur=document.querySelector('input[name=d]:checked'),D=cur?Number(cur.value):70;
+  $('blocks').innerHTML=blk(70,D===70)+blk(30,D===30)+(M==='a'?sch():'');
+}
+try{var sv=localStorage.getItem('lang');if(sv&&T[sv])lang=sv}catch(e){}
+document.querySelector('.lang').addEventListener('click',function(e){var l=e.target.getAttribute&&e.target.getAttribute('data-l');if(!l)return;lang=l;try{localStorage.setItem('lang',l)}catch(x){}tr();side();angs();calc()});
+['p','x','l'].forEach(function(i){$(i).addEventListener('input',calc)});
+document.querySelector('.card').addEventListener('change',function(e){var n=e.target.name;if(n==='m')side();if(n==='m'||n==='d')angs();calc()});
+tr();side();angs();calc();
+})();
+</script>
+</body>
+</html>
